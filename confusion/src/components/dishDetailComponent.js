@@ -7,28 +7,41 @@ export default class DishDetail extends Component {
     this.state = {};
   }
 
-  renderDish(dish, comment) {
-    if (dish != null && comment != null)
-      return (
-        <>
-          <div className="row">
-            <div className="col-12 col-md-5 m-1">
-              <Card>
-                <CardImg top src={dish.image} alt={dish.name} />
-                <CardBody>
-                  <CardTitle>{dish.name}</CardTitle>
-                  <CardText>{dish.description} </CardText>
-                </CardBody>
-              </Card>
-            </div>
-            <div className="col-12 col-md-5">
-              <h3>Comments</h3>
-              <div>{comment}</div>
-            </div>
+  renderDish(dish) {
+    if (dish != null) {
+      const commentsdisplay = dish.comments.map((comment) => {
+        return (
+          <div key="{comment.id}" className="mb-4">
+            <p>{comment.comment}</p>
+            <p>
+              {" "}
+              -- {comment.author}, {comment.date}
+            </p>
           </div>
-        </>
+        );
+      });
+
+      return (
+        <div className="row row-content m-0">
+          <div className="col-12 col-md-5 m-1">
+            <Card>
+              <CardImg width="100%" object src={dish.image} alt={dish.name} />
+              <CardBody>
+                <CardTitle>{dish.name}</CardTitle>
+                <CardText>{dish.description}</CardText>
+              </CardBody>
+            </Card>
+          </div>
+
+          <div className="col col-md-5">
+            <h2>Comments</h2>
+            {commentsdisplay}
+          </div>
+        </div>
       );
-    else return <div></div>;
+    } else {
+      return <div></div>;
+    }
   }
 
   render() {
