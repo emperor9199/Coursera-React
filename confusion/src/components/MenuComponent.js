@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { Card, CardTitle, CardImg, CardImgOverlay } from "reactstrap";
 import DishDetail from "./DishDetailComponent";
-import { COMMENTS } from "../shared/comments";
 
 export default class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      comments: COMMENTS,
       selectedDish: null,
     };
   }
@@ -34,10 +32,7 @@ export default class Menu extends Component {
       <div className="container">
         <div className="row">{menu}</div>
 
-        <DishDetail
-          selectedDish={this.state.selectedDish}
-          selectedComment={this.state.comments}
-        />
+        <DishDetail selectedDish={this.state.selectedDish} />
       </div>
     );
   }

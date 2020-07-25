@@ -12,9 +12,8 @@ export default class DishDetail extends Component {
       const commentsdisplay = dish.comments.map((comment) => {
         return (
           <div key="{comment.id}" className="mb-4">
-            <p>{comment.comment}</p>
+            <p>{comment.comment}</p>{" "}
             <p>
-              {" "}
               -- {comment.author}, {comment.date}
             </p>
           </div>
@@ -45,22 +44,10 @@ export default class DishDetail extends Component {
   }
 
   render() {
-    const comment = this.props.selectedComment.map((comment) => {
-      return (
-        <div key={comment.id}>
-          <div>{comment.comment}</div>
-          <br />
-          <div>
-            --{comment.author} {comment.date}
-          </div>
-        </div>
-      );
-    });
-
     return (
       <>
         <div>
-          <div>{this.renderDish(this.props.selectedDish, comment)}</div>
+          <div>{this.renderDish(this.props.selectedDish)}</div>
         </div>
       </>
     );
