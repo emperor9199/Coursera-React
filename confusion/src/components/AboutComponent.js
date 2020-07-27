@@ -9,8 +9,8 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
-function About(props) {
-  const leaders = props.leaders.map((leader) => {
+function RenderLeader({ leaders }) {
+  return leaders.map((leader) => {
     return (
       <div key={leader.id} className="col-12 mt-5">
         <Media tag="li">
@@ -25,7 +25,9 @@ function About(props) {
       </div>
     );
   });
+}
 
+function About({ leaders }) {
   return (
     <div className="container">
       <div className="row">
@@ -102,7 +104,10 @@ function About(props) {
           <h2>Corporate Leadership</h2>
         </div>
         <div className="col-12">
-          <Media list>{leaders}</Media>
+          <Media list>
+            {" "}
+            <RenderLeader leaders={leaders} />
+          </Media>
         </div>
       </div>
     </div>
