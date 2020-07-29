@@ -8,6 +8,7 @@ import {
   CardSubtitle,
 } from "reactstrap";
 import { Loading } from "./LoadingComponent";
+import { baseUrl } from "../shared/baseUrl";
 
 function RenderCard({ item, isLoading, errMess }) {
   if (isLoading) {
@@ -17,7 +18,7 @@ function RenderCard({ item, isLoading, errMess }) {
   } else
     return (
       <Card>
-        <CardImg src={item.image} alt={item.name} />
+        <CardImg src={baseUrl + item.image} alt={item.name} />
         <CardBody>
           <CardTitle>{item.name}</CardTitle>
           {item.designation ? (
@@ -29,7 +30,15 @@ function RenderCard({ item, isLoading, errMess }) {
     );
 }
 
-function Home({ dish, leader, promotion, dishesLoading, dishesErrMess }) {
+function Home({
+  dish,
+  leader,
+  promotion,
+  dishesLoading,
+  dishesErrMess,
+  promoLoading,
+  promoErrMess,
+}) {
   return (
     <div className="container">
       <div className="row">
@@ -40,19 +49,16 @@ function Home({ dish, leader, promotion, dishesLoading, dishesErrMess }) {
             errMess={dishesErrMess}
           />
         </div>
-        <div className="col-sm-4">
-          <RenderCard
-            item={leader}
-            isLoading={dishesLoading}
-            errMess={dishesErrMess}
-          />
-        </div>
+
         <div className="col-sm-4">
           <RenderCard
             item={promotion}
-            isLoading={dishesLoading}
-            errMess={dishesErrMess}
+            isLoading={promoLoading}
+            errMess={promoErrMess}
           />
+        </div>
+        <div className="col-sm-4">
+          <RenderCard item={leader} />
         </div>
       </div>
     </div>

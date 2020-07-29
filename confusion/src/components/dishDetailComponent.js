@@ -18,6 +18,7 @@ import {
 import { Control, LocalForm, Errors } from "react-redux-form";
 import { Link } from "react-router-dom";
 import { Loading } from "./LoadingComponent";
+export const baseUrl = "http://localhost:3001/";
 
 const minLength = (len) => (val) => !val || val.length >= len;
 const maxLength = (len) => (val) => val && val.length <= len;
@@ -138,7 +139,12 @@ function RenderDish({ dish, isLoading, errMess }) {
   } else if (dish != null) {
     return (
       <Card>
-        <CardImg width="100%" object src={dish.image} alt={dish.name} />
+        <CardImg
+          width="100%"
+          object
+          src={baseUrl + dish.image}
+          alt={dish.name}
+        />
         <CardBody>
           <CardTitle>{dish.name}</CardTitle>
           <CardText>{dish.description}</CardText>
@@ -174,7 +180,14 @@ function RenderComments({ comments }) {
   }
 }
 
-function DishDetail(props) {
+function DishDetail({
+  dish,
+  isLoading,
+  errMess,
+  comments,
+  commentsErrMess,
+  addComment,
+}) {
   return (
     <div className="container">
       <div className="row">
@@ -182,24 +195,20 @@ function DishDetail(props) {
           <BreadcrumbItem>
             <Link to="/menu">Menu</Link>
           </BreadcrumbItem>
-          <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+          <BreadcrumbItem active>{dish.name}</BreadcrumbItem>
         </Breadcrumb>
         <div className="col-12">
-          <h3>{props.dish.name}</h3>
+          <h3>{dish.name}</h3>
           <hr />
         </div>
       </div>
       <div className="row">
         <div className="col-12 col-md-5 m-1">
-          <RenderDish
-            dish={props.dish}
-            isLoading={props.isLoading}
-            errMess={props.errMess}
-          />
+          <RenderDish dish={dish} isLoading={isLoading} errMess={errMess} />
         </div>
         <div className="col-12 col-md-5 m-1">
-          <RenderComments comments={props.comments} />
-          <CommentForm addComment={props.addComment} dishId={props.dish.id} />
+          <RenderComments comments={comments} />
+          <CommentForm addComment={addComment} dishId={dish.id} />
         </div>
       </div>
     </div>
