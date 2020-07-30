@@ -46,6 +46,8 @@ function Home({
   dishesErrMess,
   promoLoading,
   promoErrMess,
+  leadersLoading,
+  leadersErrMess,
 }) {
   return (
     <div className="container">
@@ -66,7 +68,11 @@ function Home({
           />
         </div>
         <div className="col-sm-4">
-          <RenderCard item={leader} />
+          <RenderCard
+            item={leader}
+            isLoading={leadersLoading}
+            errMess={leadersErrMess}
+          />
         </div>
       </div>
     </div>
